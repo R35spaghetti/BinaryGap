@@ -3,18 +3,18 @@ using BinaryGap;
 
 Solution test = new Solution();
 
-var number1 = test.SolutionMethod(1041);
-var number2 = test.SolutionMethod(15);
-var number3 = test.SolutionMethod(32);
-Console.WriteLine(test.GetMostZeros(number1));
-Console.WriteLine(test.GetMostZeros(number2));
-Console.WriteLine(test.GetMostZeros(number3));
+var number1 = test.TurnNumberIntoBinary(1041);
+var number2 = test.TurnNumberIntoBinary(15);
+var number3 = test.TurnNumberIntoBinary(32);
+Console.WriteLine(test.GetBiggestBinaryZeroGap(number1));
+Console.WriteLine(test.GetBiggestBinaryZeroGap(number2));
+Console.WriteLine(test.GetBiggestBinaryZeroGap(number3));
 
 namespace BinaryGap
 {
     public class Solution
     {
-        public int GetMostZeros(string number)
+        public int GetBiggestBinaryZeroGap(string number)
         {
             int currentCount = 0;
             int longestCount = 0;
@@ -52,7 +52,7 @@ namespace BinaryGap
         }
 
 
-        public string SolutionMethod(int n)
+        public string TurnNumberIntoBinary(int n)
         {
             StringBuilder binary = new StringBuilder();
             do
