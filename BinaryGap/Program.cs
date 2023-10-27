@@ -1,21 +1,24 @@
-﻿// See https://aka.ms/new-console-template for more information
-
+﻿using System.Text;
 using BinaryGap;
 
 Solution test = new Solution();
 
-Console.WriteLine(test.SolutionMethod(1041));
-var siffra = test.SolutionMethod(1041);
-Console.WriteLine(test.GetMostZeros(siffra));
+var number1 = test.SolutionMethod(1041);
+var number2 = test.SolutionMethod(15);
+var number3 = test.SolutionMethod(32);
+Console.WriteLine(test.GetMostZeros(number1));
+Console.WriteLine(test.GetMostZeros(number2));
+Console.WriteLine(test.GetMostZeros(number3));
 
 namespace BinaryGap
-{   
+{
     public class Solution
     {
         public int GetMostZeros(string number)
         {
             int currentCount = 0;
             int longestCount = 0;
+            bool hasOne = false;
 
             foreach (char digit in number)
             {
@@ -25,43 +28,56 @@ namespace BinaryGap
                 }
                 else
                 {
-                    currentCount = 0;
-                }
+                    if (hasOne)
+                    {
+                        if (currentCount > longestCount)
+                        {
+                            longestCount = currentCount;
+                        }
 
-                if (currentCount > longestCount)
-                {
-                    longestCount = currentCount;
+                        currentCount = 0;
+                    }
+
+                    hasOne = true;
                 }
             }
 
-            return longestCount;
+            // If there are no binary gaps, return 0
+            if (!hasOne)
+            {
+                return 0;
+            }
 
+            return longestCount;
         }
-        
+
+
         public string SolutionMethod(int n)
         {
-            long remainder = 0;
-            string binary = "";
+            StringBuilder binary = new StringBuilder();
             do
             {
-                
                 if (n % 2 == 0)
                 {
-                    n = n / 2;
-                    
-                    binary += "0";
+                    binary.Insert(0, "0");
                 }
                 else
                 {
-                    n = n / 2;
-
-                    binary += "1";
+                    binary.Insert(0, "1");
                 }
 
-                remainder = n;
-            } while (remainder != 0);
+                n = n / 2;
+            } while (n != 0);
 
-            return binary;
+
+            string binaryString = binary.ToString();
+
+            if (binaryString.Count(c => c == '1') == 1)
+            {
+                return "0";
+            }
+
+            return binaryString;
         }
     }
 }
