@@ -42,7 +42,6 @@ namespace BinaryGap
                 }
             }
 
-            // If there are no binary gaps, return 0
             if (!hasOne)
             {
                 return 0;
