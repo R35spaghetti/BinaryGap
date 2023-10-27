@@ -1,17 +1,44 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using System.Runtime.InteropServices.JavaScript;
 using BinaryGap;
 
 Solution test = new Solution();
 
 Console.WriteLine(test.SolutionMethod(1041));
+var siffra = test.SolutionMethod(1041);
+Console.WriteLine(test.GetMostZeros(siffra));
 
 namespace BinaryGap
-{
+{   
     public class Solution
     {
-        public long SolutionMethod(int n)
+        public int GetMostZeros(string number)
+        {
+            int currentCount = 0;
+            int longestCount = 0;
+
+            foreach (char digit in number)
+            {
+                if (digit == '0')
+                {
+                    currentCount++;
+                }
+                else
+                {
+                    currentCount = 0;
+                }
+
+                if (currentCount > longestCount)
+                {
+                    longestCount = currentCount;
+                }
+            }
+
+            return longestCount;
+
+        }
+        
+        public string SolutionMethod(int n)
         {
             long remainder = 0;
             string binary = "";
@@ -34,7 +61,7 @@ namespace BinaryGap
                 remainder = n;
             } while (remainder != 0);
 
-            return Convert.ToInt64(binary);
+            return binary;
         }
     }
 }
